@@ -1,34 +1,13 @@
 package handler
 
 import (
+	model2 "day1/model"
 	"encoding/json"
-	"fmt"
-	"io/ioutil"
 )
-
-type model struct {
-	Id           string `json:"id"` //士兵id
-	Rarity       string //士兵稀有度
-	CombatPoints string //战力
-	Cvc          string //版本
-	UnlockArena  string //当前解锁阶段
-
-}
-
-func getMap() (mm map[string]model) {
-	bytes, _ := ioutil.ReadFile("../../conf/new.json")
-	m := make(map[string]model)
-	err := json.Unmarshal(bytes, &m)
-	if err != nil {
-		fmt.Println(err)
-		return
-	}
-	return m
-}
 
 // FindSoldierByRaUnCv 1）输入稀有度，当前解锁阶段和cvc，获取该稀有度cvc合法且已解锁的所有士兵
 func FindSoldierByRaUnCv(rarity, unlockArena, cvc string) (s string) {
-	m1 := getMap()
+	m1 := model2.GetMap()
 	m2 := make(map[string]string)
 	for s, k := range m1 {
 		if k.Rarity == rarity && k.UnlockArena <= unlockArena && k.Cvc == cvc {
@@ -42,21 +21,21 @@ func FindSoldierByRaUnCv(rarity, unlockArena, cvc string) (s string) {
 
 // FindSoldierRaById 2）输入士兵id获取稀有度
 func FindSoldierRaById(id string) (s string) {
-	m1 := getMap()
+	m1 := model2.GetMap()
 	com := m1[id].Rarity
 	return com
 }
 
 // FindSoldierCoById 3）输入士兵id获取战力
 func FindSoldierCoById(id string) (s string) {
-	m1 := getMap()
+	m1 := model2.GetMap()
 	com := m1[id].CombatPoints
 	return com
 }
 
 // FindSoldierByCv 4）输入cvc获取所有合法的士兵
 func FindSoldierByCv(cvc string) (s string) {
-	m1 := getMap()
+	m1 := model2.GetMap()
 	m2 := make(map[string]string)
 	for s, k := range m1 {
 		if k.Cvc == cvc {
@@ -71,7 +50,7 @@ func FindSoldierByCv(cvc string) (s string) {
 // FindSoldierByUn 5）获取每个阶段解锁相应士兵的json数据
 func FindSoldierByUn() string {
 	//将new.json转为map
-	m1 := getMap()
+	m1 := model2.GetMap()
 	//key为解锁阶段，value为一个切片，切片里放符合解锁阶段的士兵信息
 	m2 := map[string][]string{}
 	s := "UnlockArena: "

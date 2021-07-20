@@ -1,11 +1,21 @@
-package handler
+package internal
 
 import (
+	"day1/internal/handler"
 	"encoding/json"
 	"reflect"
 	"testing"
 	"unsafe"
 )
+
+type model struct {
+	Id           string `json:"id"` //士兵id
+	Rarity       string //士兵稀有度
+	CombatPoints string //战力
+	Cvc          string //版本
+	UnlockArena  string //当前解锁阶段
+
+}
 
 //string转byte[]
 func String2Bytes(s string) []byte {
@@ -19,7 +29,7 @@ func String2Bytes(s string) []byte {
 }
 func TestFindSoldierByRaUnCv(t *testing.T) {
 	arity, unlockArena, cvc := "2", "3", "100"
-	ret := FindSoldierByRaUnCv(arity, unlockArena, cvc)
+	ret := handler.FindSoldierByRaUnCv(arity, unlockArena, cvc)
 	retBytes := String2Bytes(ret)
 	m := make(map[string]string)
 	_ = json.Unmarshal(retBytes, &m)
@@ -41,7 +51,7 @@ func TestFindSoldierByRaUnCv(t *testing.T) {
 func TestFindSoldierRaById(t *testing.T) {
 	id := "13206"
 	ra := "3"
-	ret := FindSoldierRaById(id)
+	ret := handler.FindSoldierRaById(id)
 	if ra != ret {
 		t.Error(ret)
 	}
@@ -50,7 +60,7 @@ func TestFindSoldierRaById(t *testing.T) {
 func TestFindSoldierCoById(t *testing.T) {
 	id := "13206"
 	co := "3000"
-	ret := FindSoldierCoById(id)
+	ret := handler.FindSoldierCoById(id)
 	if co != ret {
 		t.Error(ret)
 	}
@@ -58,7 +68,7 @@ func TestFindSoldierCoById(t *testing.T) {
 
 func TestFindSoldierByCv(t *testing.T) {
 	cvc := "1000"
-	ret := FindSoldierByCv(cvc)
+	ret := handler.FindSoldierByCv(cvc)
 	retBytes := String2Bytes(ret)
 	m := make(map[string]string)
 	_ = json.Unmarshal(retBytes, &m)
@@ -79,7 +89,7 @@ func TestFindSoldierByCv(t *testing.T) {
 
 func TestFindSoldierByUn(t *testing.T) {
 	un := "1"
-	ret := FindSoldierByUn()
+	ret := handler.FindSoldierByUn()
 	retBytes := String2Bytes(ret)
 	m := map[string][]string{}
 	_ = json.Unmarshal(retBytes, &m)

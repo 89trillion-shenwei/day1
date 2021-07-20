@@ -30,10 +30,10 @@
 ├── internal
 │   ├── ctrl
 │   │   └── soldier.go
+│   ├── findSoldier_test.go
 │   ├── globalError.go
 │   ├── handler
-│   │   ├── findSoldier.go
-│   │   └── findSoldier_test.go
+│   │   └── findSoldier.go
 │   └── router
 │       └── router.go
 ├── locustfile.py
@@ -43,7 +43,8 @@
 ├── util
 │   ├── iniAnaly.go
 │   └── jsonAnaly.go
-└── 压力测试报告.html
+├── 压力测试报告.html
+└── 题1流程图.png
 ```
 
 ## 3.代码逻辑分层
@@ -53,11 +54,11 @@
 | 应用层      | /app/http2/httpServer.go                  | 服务器启动                    | 调用工具层，调用路由层    | 不可同层调用 |
 | 工具层      | /config/iniAnaly.go ,/config/jsonAnaly.go | 解析ini文件，处理原始json文件 | 被应用层调用              | 不可同层调用 |
 | 压力测试    | locustfile.py                             | 压力测试                      | 无调用关系                | 不可同层调用 |
-| 单元测试    | /internal/handler/findSoldier_test.go     | 单元测试                      | 无调用关系                | 不可同层调用 |
+| 单元测试    | /internal/findSoldier_test.go             | 单元测试                      | 无调用关系                | 不可同层调用 |
 | 路由层      | /internal/router/router.go                | 路由转发                      | 被应用层调用，调用控制层  | 不可同层调用 |
 | 控制层      | /internal/ctrl/soldier.go                 | 请求参数处理，响应            | 被路由层调用，调用handler | 不可同层调用 |
 | handler层   | /internal/handler/findSoldier.go          | 处理具体业务                  | 被控制层调用              | 不可同层调用 |
-| globalError | /internal/globalError                     | 统一异常处理                  | 被router调用              | 不可同层调用 |
+| globalError | /internal/globalError                     | 统一异常处理                  | 被ctrl层调用              | 不可同层调用 |
 
 
 
@@ -87,8 +88,8 @@
 
 | 状态码 | 说明     |
 | ------ | -------- |
-| 0      | 成功     |
-| 404    | no found |
+| 无     | 成功     |
+| 1001   | 参数为空 |
 
 
 

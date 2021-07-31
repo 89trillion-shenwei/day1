@@ -10,7 +10,7 @@ func InitRouter() *gin.Engine {
 
 	group1 := r.Group("")
 	{
-		group1.GET("/FindSoldierByRaUnCv", ctrl.ReturnData(ctrl.FindSoldierByCvApi))
+		group1.GET("/FindSoldierByRaUnCv", ctrl.ReturnData(ctrl.FindSoldierByRaUnCvApi))
 	}
 
 	group2 := r.Group("")

@@ -20,8 +20,8 @@ func FindSoldierByRaUnCvApi(c *gin.Context) (string, error) {
 	if cv == "" {
 		return "", internal.IsEmptyError("cvc不能为空")
 	}
-	//c.String(http.StatusOK, handler.FindSoldierByRaUnCv(ra, un, cv))
-	return handler.FindSoldierByRaUnCv(ra, un, cv), nil
+	//c.String(http.StatusOK, handler.FindSoldierByRaUnCv(ra, un, cv))\
+	return handler.FindSoldierByRaUnCv(ra, un, cv)
 }
 
 func FindSoldierRaByIdApi(c *gin.Context) (string, error) {
@@ -48,12 +48,12 @@ func FindSoldierByCvApi(c *gin.Context) (string, error) {
 		return "", internal.IsEmptyError("cvc不能为空")
 	}
 	//c.String(http.StatusOK, handler.FindSoldierByCv(cvc))
-	return handler.FindSoldierByCv(cvc), nil
+	return handler.FindSoldierByCv(cvc)
 }
 
 func FindSoldierByUnApi(c *gin.Context) (string, error) {
 	//c.String(http.StatusOK, handler.FindSoldierByUn())
-	return handler.FindSoldierByUn(), nil
+	return handler.FindSoldierByUn()
 }
 
 type Api func(c *gin.Context) (string, error)

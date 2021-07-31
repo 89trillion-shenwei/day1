@@ -15,7 +15,8 @@ func (err GlobalError) Error() string {
 }
 
 const (
-	IsEmpty = 1001 //参数不能为空
+	IsEmpty         = 1001 //参数不能为空
+	InternalService = 1002 //内部服务错误
 )
 
 //IsEmptyError  参数不能为空
@@ -23,6 +24,15 @@ func IsEmptyError(message string) GlobalError {
 	return GlobalError{
 		Status:  http.StatusForbidden,
 		Code:    IsEmpty,
+		Message: message,
+	}
+}
+
+//InternalServiceError  内部服务错误
+func InternalServiceError(message string) GlobalError {
+	return GlobalError{
+		Status:  http.StatusForbidden,
+		Code:    InternalService,
 		Message: message,
 	}
 }

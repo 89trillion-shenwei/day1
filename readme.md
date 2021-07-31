@@ -86,23 +86,17 @@
 
 响应状态码
 
-| 状态码 | 说明     |
-| ------ | -------- |
-| 无     | 成功     |
-| 1001   | 参数为空 |
+| 状态码 | 说明             |
+| ------ | ---------------- |
+| 无     | 成功             |
+| 1001   | 参数为空         |
+| 1002   | 服务内部出现异常 |
 
 
 
 ## 6.第三方库
 
 ```
-
-"io/ioutil"
-"encoding/json"
-"reflect"
-"testing"
-"unsafe"
-"net/http"
 "github.com/Unknwon/goconfig"
 "github.com/spf13/pflag"
 ```

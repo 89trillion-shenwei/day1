@@ -1,7 +1,6 @@
-package internal
+package handler
 
 import (
-	"day1/internal/handler"
 	"encoding/json"
 	"reflect"
 	"testing"
@@ -29,7 +28,7 @@ func String2Bytes(s string) []byte {
 }
 func TestFindSoldierByRaUnCv(t *testing.T) {
 	arity, unlockArena, cvc := "2", "3", "100"
-	ret := handler.FindSoldierByRaUnCv(arity, unlockArena, cvc)
+	ret, _ := FindSoldierByRaUnCv(arity, unlockArena, cvc)
 	retBytes := String2Bytes(ret)
 	m := make(map[string]string)
 	_ = json.Unmarshal(retBytes, &m)
@@ -51,7 +50,7 @@ func TestFindSoldierByRaUnCv(t *testing.T) {
 func TestFindSoldierRaById(t *testing.T) {
 	id := "13206"
 	ra := "3"
-	ret := handler.FindSoldierRaById(id)
+	ret := FindSoldierRaById(id)
 	if ra != ret {
 		t.Error(ret)
 	}
@@ -60,7 +59,7 @@ func TestFindSoldierRaById(t *testing.T) {
 func TestFindSoldierCoById(t *testing.T) {
 	id := "13206"
 	co := "3000"
-	ret := handler.FindSoldierCoById(id)
+	ret := FindSoldierCoById(id)
 	if co != ret {
 		t.Error(ret)
 	}
@@ -68,7 +67,7 @@ func TestFindSoldierCoById(t *testing.T) {
 
 func TestFindSoldierByCv(t *testing.T) {
 	cvc := "1000"
-	ret := handler.FindSoldierByCv(cvc)
+	ret, _ := FindSoldierByCv(cvc)
 	retBytes := String2Bytes(ret)
 	m := make(map[string]string)
 	_ = json.Unmarshal(retBytes, &m)
@@ -89,7 +88,7 @@ func TestFindSoldierByCv(t *testing.T) {
 
 func TestFindSoldierByUn(t *testing.T) {
 	un := "1"
-	ret := handler.FindSoldierByUn()
+	ret, _ := FindSoldierByUn()
 	retBytes := String2Bytes(ret)
 	m := map[string][]string{}
 	_ = json.Unmarshal(retBytes, &m)

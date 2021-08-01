@@ -16,7 +16,7 @@ type model struct {
 }
 
 func GetMap() (mm map[string]model) {
-	bytes, err1 := ioutil.ReadFile("../conf/new.json")
+	bytes, err1 := ioutil.ReadFile("../../conf/new.json")
 	if err1 != nil {
 		fmt.Println(err1.Error())
 	}
